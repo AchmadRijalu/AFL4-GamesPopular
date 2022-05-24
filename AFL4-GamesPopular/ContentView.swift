@@ -14,11 +14,14 @@ import Foundation
 
 struct ContentView: View {
     
-    @StateObject private var model = DataState()
     
+    
+    
+    @AppStorage("darkModeEnabled") private var darkmodeEnabled = false
+    @AppStorage("systemThemeEnabled") private var systemThemeEnabled = false
     var body: some View {
         TabView{
-            ListGame().environmentObject(model).tabItem{
+            ListGame().tabItem{
                 Image(systemName: "house")
                 Text("Home")
             }
@@ -28,11 +31,13 @@ struct ContentView: View {
                 Text("Wishlist")
             }
             
-            ProfileView().tabItem{
+            ProfileView(darkModeEnabled: $darkmodeEnabled, systemThemeEnabled: $systemThemeEnabled).tabItem{
                 Image(systemName: "person")
                 Text("Profile")
                 
             }
+        }.onAppear{
+            SystemThemeManager.shared.handleTheme(darkMode: darkmodeEnabled, system: systemThemeEnabled)
         }
         
     

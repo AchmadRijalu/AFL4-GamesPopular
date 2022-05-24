@@ -40,8 +40,8 @@ struct URLImage:View{
 }
 
 struct ListGame: View {
-    @EnvironmentObject var model:DataState
     
+    @StateObject var settings = GameIndex()
     var steam:Int = 1
     var gamersgate:Int = 2
     var epicgame:Int = 3
@@ -60,9 +60,9 @@ struct ListGame: View {
     
     
     @State private var isShowedHeader:Int? = 0
-
+    
     @ObservedObject var modelHide =  HideState()
-        
+    
     private let gridmodel = [GridItem(.adaptive(minimum: 170))]
     
     @State var bottomleft:CGFloat = 0
@@ -72,148 +72,140 @@ struct ListGame: View {
     var body: some View {
         VStack{
             
-            if modelHide.pushed == false{
+//            if modelHide.pushed == false{
                 
-                    VStack(alignment:.leading){
-                            Text("👋 Anbu!")
-                                .padding(.horizontal,15)
-                            Header()
-                        }
-                    .transition(.move(edge: .top))
-                    .animation(.easeIn(duration: 0.2))
+                VStack(alignment:.leading){
+                    Text("👋 Anbu!")
+                        .padding(.horizontal,15)
+                    Header()
+                }
+                .transition(.move(edge: .top))
+                .animation(.easeIn(duration: 0.2))
                 
-
-            }
-            else{
-                //Hide Component
-            }
+//
+//            }
+//            else{
+//                //Hide Component
+//            }
             
-                Spacer()
+            Spacer()
             NavigationView{
-                
-                ScrollView{
-                        VStack{
-                            //STEAM
-                            VStack{
-                                HStack{
-                                    Image("steam").resizable().frame(width: 25, height: 25)
-                                    
-                                    Text("Steam Store").font(.system(size: 22)).bold()
-                                    Spacer()
-                                    NavigationLink(destination: ListMoreGame(), isActive: $modelHide.pushed) {
-                                        
-                                    }
-                                    Text("More").underline().padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)).foregroundColor(.blue)
-                                                        .onTapGesture {
-                                                            //perform some tasks if needed before opening Destination view
-                                                            self.modelHide.pushed = true
-                                                            
-                                                            
-                                                            
-                                    }
-                                    
-                                   
-                                }
-                                LazyVGrid(columns: gridmodel,spacing: 20){
-                                    ForEach(viewModelSteamSorted.games, id: \.self){
-                                        game in
-                                            VStack{
-                                                ZStack(alignment: .bottomLeading){
-                                                    URLImage(urlstring: game.thumb)
-                                                    Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
-                                                        .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                                    
-                                                }
-                                                .cornerRadius(3)
-                                                VStack{
-                                                    Text(game.title)
-                                                        .bold()
-                                                    Spacer()
-                                                    Button("Add to Wishlist"){
-                                                    
-                                                    }.background(.white).frame(height: 55).buttonStyle(.bordered)
-                                                    Spacer()
-                                                    
-                                                }.frame(width:180,height: 100)
-                                                    .background(.white)
-                                                
-                                            }
-                                            .border(Color.gray)
-                                            .cornerRadius(5)
-                                        
-                                    }
-                                }
-//                                .searchable(text: $searchText, prompt: "Cari")
-                                .onAppear{viewModelSteamSorted.fetch()
-                                }
-                        }
-                        .padding(.bottom ,30)
-                        }
-                    //GAMERSGATE
+            
+            ScrollView{
+                VStack{
+                    //STEAM
                     VStack{
                         HStack{
-                            Image("gamersgate").resizable().frame(width: 29, height: 29)
+                            Image("steam").resizable().frame(width: 25, height: 25)
                             
-                            Text("GamersGate Store").font(.system(size: 22)).bold()
+                            Text("Steam Store").font(.system(size: 22)).bold()
                             Spacer()
-                            NavigationLink(destination: ListMoreGame(), isActive: $modelHide.pushed) {
-                                Text("More").underline().padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)).foregroundColor(.blue)
-                                                    .onTapGesture {
-                                                        //perform some tasks if needed before opening Destination view
-                                                        self.modelHide.pushed = true
-                                                    }
+                            NavigationLink(destination: ListMoreGame(gindex: 1)) {
+                                Text("More").foregroundColor(.blue)
+//                                    .onTapGesture {
+                                        //perform some tasks if needed before opening Destination view
+//                                        self.modelHide.pushed = true
+//                                    }
                             }
+                            
+                            
                         }
                         LazyVGrid(columns: gridmodel,spacing: 20){
-                            ForEach(viewModelGamersGateSorted.games, id: \.self){
+                            ForEach(viewModelSteamSorted.games, id: \.self){
                                 game in
-                                if game.storeID == "2"{
-                                    VStack{
-                                        ZStack(alignment: .bottomLeading){
-                                            URLImage(urlstring: game.thumb)
-                                            Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
-                                                .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                            }
-                                        .cornerRadius(3)
-                                        VStack{
-                                            Text(game.title)
-                                                .bold()
-                                            Spacer()
-                                            Button("Add to Wishlist"){
-                                                
-                                            }.background(.white).frame(height: 55).buttonStyle(.bordered)
-                                            
-                                        }.frame(width:180,height: 100)
-                                            .background(.white)
+                                VStack{
+                                    ZStack(alignment: .bottomLeading){
+                                        URLImage(urlstring: game.thumb)
+                                        Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
+                                            .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
                                         
                                     }
-                                    .border(Color.gray)
-                                    .cornerRadius(10)
-                                }
-                                else{
+                                    .cornerRadius(3)
+                                    VStack{
+                                        Text(game.title).foregroundColor(Theme.textColor)
+                                            .bold()
+                                        Spacer()
+                                        Button("Add to Wishlist"){
+                                            
+                                        }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                        Spacer()
+                                        
+                                    }.frame(width:180,height: 100)
+                                        .background(.white)
                                     
                                 }
+                                .border(Color.gray)
+                                .cornerRadius(5)
+                                
                             }
-                        }.onAppear{
-                            viewModelGamersGateSorted.fetch()
                         }
-                    }.padding(.bottom, 30)
-                    
-                    //EPICGAMES
-                    VStack{
+                        //                                .searchable(text: $searchText, prompt: "Cari")
+                        .onAppear{viewModelSteamSorted.fetch()
+                        }
+                    }
+                    .padding(.bottom ,30)
+                }
+                //GAMERSGATE
+                VStack{
+                    HStack{
+                        Image("gamersgate").resizable().frame(width: 29, height: 29)
                         
+                        Text("GamersGate Store").font(.system(size: 22)).bold()
+                        
+                        Spacer()
+                        NavigationLink(destination: ListMoreGame(gindex:2)) {
+                            Text("More").padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)).foregroundColor(.blue)
+//                                .onTapGesture {
+                                    //perform some tasks if needed before opening Destination view
+//                                    self.modelHide.pushed = true
+//                                }
+                        }
+                    }.padding(.bottom, 23)
                     
+                    LazyVGrid(columns: gridmodel,spacing: 20){
+                        ForEach(viewModelGamersGateSorted.games, id: \.self){
+                            game in
+                            VStack{
+                                ZStack(alignment: .bottomLeading){
+                                    URLImage(urlstring: game.thumb)
+                                    Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
+                                        .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
+                                }
+                                .cornerRadius(3)
+                                VStack{
+                                    Text(game.title).foregroundColor(Theme.textColor)
+
+                                        .bold()
+                                    Spacer()
+                                    Button("Add to Wishlist"){
+                                        
+                                    }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                    
+                                }.frame(width:180,height: 100)
+                                    .background(.white)
+                                
+                            }
+                            .border(Color.gray)
+                            .cornerRadius(10)
+                            
+                        }
+                    }.onAppear{
+                        viewModelGamersGateSorted.fetch()
+                    }
+                }.padding(.bottom, 30)
+                //EPICGAMES
+                VStack{
                     HStack{
                         Image("epicgame").resizable().frame(width: 29, height: 29)
                         
                         Text("Epic Games").font(.system(size: 22)).bold()
                         Spacer()
-                        NavigationLink(destination: ListMoreGame(), tag: 1, selection: $selection) {
-                            Text("More").underline().padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)).foregroundColor(.blue)
-                                                .onTapGesture {
-                                                    //perform some tasks if needed before opening Destination view
-                                                    self.modelHide.pushed = true
-                                                }
+                        NavigationLink(destination: ListMoreGame(gindex:3)) {
+                            Text("More").padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)).foregroundColor(.blue)
+//                                .onTapGesture {
+//                                    //perform some tasks if needed before opening Destination view
+//                                    self.modelHide.pushed = true
+//                                }
                         }
                     }
                     
@@ -226,10 +218,11 @@ struct ListGame: View {
                                         URLImage(urlstring: game.thumb)
                                         Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
                                             .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                        }
+                                    }
                                     .cornerRadius(3)
                                     VStack{
-                                        Text(game.title)
+                                        Text(game.title).foregroundColor(Theme.textColor)
+
                                             .bold()
                                         Spacer()
                                         Button("Add to Wishlist"){
@@ -250,37 +243,40 @@ struct ListGame: View {
                     }.onAppear{
                         viewModelEpicGamesSorted.fetch()
                     }
-                    }.padding(.bottom, 30)
-                    
-                    //ORIGIN
-                    VStack{
+                }.padding(.bottom , 30)
+                
+                //ORIGIN
+                VStack{
                     HStack{
                         Image("origin").resizable().frame(width: 29, height: 29)
                         
                         Text("Origin").font(.system(size: 22)).bold()
                         Spacer()
-                        NavigationLink(destination: ListMoreGame(), tag: 1, selection: $selection) {
-                            Text("More").underline().padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)).foregroundColor(.blue)
-                                                .onTapGesture {
-                                                    //perform some tasks if needed before opening Destination view
-                                                    self.modelHide.pushed = true
-                                                }
+                        NavigationLink(destination: ListMoreGame(gindex:4)) {
+                            Text("More").foregroundColor(.blue)
                         }
-                    }
-                    
-                LazyVGrid(columns: gridmodel,spacing: 20){
+                        
+//                            .onTapGesture {
+//                                //perform some tasks if needed before opening Destination view
+//                                self.modelHide.pushed = true
+//                            }
+                        
+                    }.padding(.bottom, 20)
+
+                    LazyVGrid(columns: gridmodel,spacing: 10){
                         ForEach(viewModelOriginSorted.games, id: \.self){
                             game in
-                            if game.storeID == "8"{
+                            
                                 VStack{
                                     ZStack(alignment: .bottomLeading){
                                         URLImage(urlstring: game.thumb)
                                         Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
                                             .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                        }
+                                    }
                                     .cornerRadius(3)
                                     VStack{
-                                        Text(game.title)
+                                        Text(game.title).foregroundColor(Theme.textColor)
+
                                             .bold()
                                         Spacer()
                                         Button("Add to Wishlist"){
@@ -293,95 +289,97 @@ struct ListGame: View {
                                 }
                                 .border(Color.gray)
                                 .cornerRadius(10)
-                            }
-                            else{
-                                
-                            }
+                            
                         }
                     }.onAppear{
                         viewModelOriginSorted.fetch()
                     }
-                    }.padding(.bottom, 30)
-                    //GAMEPLANET
-                    HStack{
-                        Image("gameplanet").resizable().frame(width: 29, height: 29)
-                        
-                        Text("GamePlanet").font(.system(size: 22)).bold()
-                        Spacer()
-                        NavigationLink(destination: ListMoreGame(), tag: 1, selection: $selection) {
-                            Text("More").underline().padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)).foregroundColor(.blue)
-                                                .onTapGesture {
-                                                    //perform some tasks if needed before opening Destination view
-                                                    self.modelHide.pushed = true
-                                                }
-                        }
+                    
+                    
+                }.padding(.bottom, 30)
+                //GAMEPLANET
+                HStack{
+                    Image("gameplanet").resizable().frame(width: 29, height: 29)
+                    
+                    Text("GamePlanet").font(.system(size: 22)).bold()
+                    Spacer()
+                    NavigationLink(destination: ListMoreGame(gindex:5)) {
+                        Text("More").padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)).foregroundColor(.blue)
                     }
                     
-                LazyVGrid(columns: gridmodel,spacing: 20){
-                        ForEach(viewModelGamePlanetSorted.games, id: \.self){
-                            game in
-                            if game.storeID == "27"{
-                                VStack{
-                                    ZStack(alignment: .bottomLeading){
-                                        URLImage(urlstring: game.thumb)
-                                        Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
-                                            .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                        }
-                                    .cornerRadius(3)
-                                    VStack{
-                                        Text(game.title)
-                                            .bold()
-                                        Spacer()
-                                        Button("Add to Wishlist"){
-                                            
-                                        }.background(.white).frame(height: 55).buttonStyle(.bordered)
-                                        
-                                    }.frame(width:180,height: 100)
-                                        .background(.white)
-                                    
+//                        .onTapGesture {
+//                            //perform some tasks if needed before opening Destination view
+//                            self.modelHide.pushed = true
+//                        }
+                        
+                }.padding(.bottom, 20)
+                LazyVGrid(columns: gridmodel,spacing: 10){
+                    ForEach(viewModelGamePlanetSorted.games, id: \.self){
+                        game in
+                        if game.storeID == "27"{
+                            VStack{
+                                ZStack(alignment: .bottomLeading){
+                                    URLImage(urlstring: game.thumb)
+                                    Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
+                                        .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
                                 }
-                                .border(Color.gray)
-                                .cornerRadius(10)
-                            }
-                            else{
+                                .cornerRadius(3)
+                                VStack{
+                                    Text(game.title).foregroundColor(Theme.textColor)
+
+                                        .bold()
+                                    Spacer()
+                                    Button("Add to Wishlist"){
+                                        
+                                    }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                    
+                                }.frame(width:180,height: 100)
+                                    .background(.white)
                                 
                             }
+                            .border(Color.gray)
+                            .cornerRadius(10)
                         }
-                    }.onAppear{
-                        viewModelGamePlanetSorted.fetch()
+                        else{
+                            
+                        }
                     }
-                    
-                        
-                }.navigationBarHidden(true)
-                
-                }.padding(10)
+                }.onAppear{
+                    viewModelGamePlanetSorted.fetch()
+                }
                 
                 
-                    
-            }
-            .padding(4)
+            }.navigationBarHidden(true)
+            
+        }.padding(15)
         
-        }
+        
+        
+        //            }
+        
+        
+    }
     
     
     //SEARCH TEXT VARIABLE
-//    var filteredNames:[Game]{
-//        if searchText.isEmpty{
-//            return viewModel.games
-//        }
-//        else{
-//
-//            return viewModel.games.filter{
-//
-//                $0.title.localizedStandardContains(searchText)
-//            }
-//        }
-//    }
-    }
+    //    var filteredNames:[Game]{
+    //        if searchText.isEmpty{
+    //            return viewModel.games
+    //        }
+    //        else{
+    //
+    //            return viewModel.games.filter{
+    //
+    //                $0.title.localizedStandardContains(searchText)
+    //            }
+    //        }
+    //    }
+}
 
 
 struct ListGame_Previews: PreviewProvider {
     static var previews: some View {
         ListGame()
     }
+}
 }

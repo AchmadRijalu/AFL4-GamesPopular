@@ -18,6 +18,8 @@
 		042E13F4283C762B00EAA199 /* ListMoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13F3283C762B00EAA199 /* ListMoreGame.swift */; };
 		042E13F6283C764400EAA199 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13F5283C764400EAA199 /* ProfileView.swift */; };
 		042E13F9283C76C700EAA199 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13F8283C76C700EAA199 /* Header.swift */; };
+		042E13FE283CB7EE00EAA199 /* SystemThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13FD283CB7EE00EAA199 /* SystemThemeManager.swift */; };
+		042E1400283CF7D700EAA199 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13FF283CF7D700EAA199 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		042E13F3283C762B00EAA199 /* ListMoreGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMoreGame.swift; sourceTree = "<group>"; };
 		042E13F5283C764400EAA199 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		042E13F8283C76C700EAA199 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		042E13FD283CB7EE00EAA199 /* SystemThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemThemeManager.swift; sourceTree = "<group>"; };
+		042E13FF283CF7D700EAA199 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 		042E13DA283C71B600EAA199 /* AFL4-GamesPopular */ = {
 			isa = PBXGroup;
 			children = (
+				042E13FA283CB7AE00EAA199 /* Theme */,
 				042E13F7283C764A00EAA199 /* Profile */,
 				042E13EE283C75E700EAA199 /* Games */,
 				042E13E9283C759A00EAA199 /* Model */,
@@ -110,6 +115,15 @@
 				042E13F5283C764400EAA199 /* ProfileView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		042E13FA283CB7AE00EAA199 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				042E13FD283CB7EE00EAA199 /* SystemThemeManager.swift */,
+				042E13FF283CF7D700EAA199 /* Theme.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,10 +200,12 @@
 				042E13F9283C76C700EAA199 /* Header.swift in Sources */,
 				042E13F4283C762B00EAA199 /* ListMoreGame.swift in Sources */,
 				042E13F2283C761700EAA199 /* WishlistGame.swift in Sources */,
+				042E1400283CF7D700EAA199 /* Theme.swift in Sources */,
 				042E13EB283C75AB00EAA199 /* helper.swift in Sources */,
 				042E13DE283C71B600EAA199 /* ContentView.swift in Sources */,
 				042E13F0283C75FF00EAA199 /* ListGame.swift in Sources */,
 				042E13DC283C71B600EAA199 /* AFL4_GamesPopularApp.swift in Sources */,
+				042E13FE283CB7EE00EAA199 /* SystemThemeManager.swift in Sources */,
 				042E13ED283C75CC00EAA199 /* Games.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

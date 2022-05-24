@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     
 //    var Edge = UIApplication.shared.windows.first?.safeAreaInsets
+    @Binding var darkModeEnabled:Bool
+    @Binding var systemThemeEnabled:Bool
     
     @State private var ison = false
     @State private var isexit = false
@@ -21,37 +23,39 @@ struct ProfileView: View {
                 .padding(.bottom , 40)
             VStack(){
                 VStack(alignment: .leading){
-                    Text("Appeareance").foregroundColor(.blue)
+                    Text("Appearance").foregroundColor(.blue)
                     HStack{
                     Image(systemName: "moon.stars")
-                        Text("Night Mode")
+                        Text("Night Mode").foregroundColor(Theme.textColor)
                         Spacer()
-                        Toggle(isOn: $ison, label:{
+                        Toggle(isOn: $darkModeEnabled, label:{
                             Text("Toggle")
-                        }).labelsHidden()
-                    }.padding(18).background(.white).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
+                        }).labelsHidden().onChange(of: darkModeEnabled, perform: {
+                            _ in SystemThemeManager.shared.handleTheme(darkMode: darkModeEnabled, system: systemThemeEnabled)
+                        })
+                    }.foregroundColor(Theme.textColor).padding(18).background(.white).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
                 }.padding(.bottom , 27)
                 
                 VStack(alignment: .leading, spacing: 15){
                     Text("Help").foregroundColor(.blue)
                     HStack{
                     Image(systemName: "goforward")
-                        Text("Version")
+                        Text("Version").foregroundColor(Theme.textColor)
                         Spacer()
                         Text("1.0").bold()
-                    }.padding(20).background(.white).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
+                    }.foregroundColor(Theme.textColor).padding(20).background(.white).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
                     Button(action: {
                         about.toggle()
                     }) {
                         HStack {
                             Image(systemName: "gear.circle")
-                            Text("About Application").foregroundColor(.black).frame(height: 24).frame(maxWidth: .infinity , alignment: .leading).font(.headline)
+                            Text("About Application").foregroundColor(Theme.textColor).frame(height: 24).frame(maxWidth: .infinity , alignment: .leading).font(.headline)
                         }
                     }.alert("This application is my project in 4th Semester", isPresented: $about){
                         Button("Okay", role: .cancel){
                             
                         }
-                    }.foregroundColor(.black).frame(height: 24).frame(maxWidth: .infinity , alignment: .leading).padding( 20).foregroundColor(.white).cornerRadius(10).background(.white).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
+                    }.foregroundColor(Theme.textColor).frame(height: 24).frame(maxWidth: .infinity , alignment: .leading).padding( 20).foregroundColor(.white).cornerRadius(10).background(.white).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
                    
                     
                     
@@ -62,7 +66,7 @@ struct ProfileView: View {
                     }) {
                         HStack {
                             Image(systemName: "phone.fill")
-                            Text("Contact Us").foregroundColor(.black).frame(height: 24).frame(maxWidth: .infinity , alignment: .leading)
+                            Text("Contact Us").foregroundColor(Theme.textColor).frame(height: 24).frame(maxWidth: .infinity , alignment: .leading)
                         }
                     }.foregroundColor(.black).frame(height: 24).frame(maxWidth: .infinity , alignment: .leading).padding( 20).foregroundColor(.white).cornerRadius(10).background(.white).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
 
@@ -71,20 +75,7 @@ struct ProfileView: View {
             
             Spacer()
             VStack{
-//                HStack{
-//                    Text("Exit").foregroundColor(.white).bold()
-//                    Spacer()
-//                    Image(systemName: "rectangle.portrait.and.arrow.right")
-//
-//                }.onTapGesture {
-//
-//                }.alert("Exit Application?", isPresented: $isexit){
-//                    Button("Exit", role: .destructive){
-//                        exit(0)
-//                    }
-//                    Button("Cancel", role: .cancel){
-//                    }
-//                }.padding(18).background(.pink).cornerRadius(10).shadow(color: .black, radius: 0.6, x: 0, y: 2)
+
                 Button(action: {
                     isexit.toggle()
                 }) {
@@ -106,7 +97,7 @@ struct ProfileView: View {
             }
             
         }.padding(50)
-            .background(.white)
+            
 
         
         
@@ -115,6 +106,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(darkModeEnabled: .constant(false), systemThemeEnabled: .constant(false))
     }
 }
