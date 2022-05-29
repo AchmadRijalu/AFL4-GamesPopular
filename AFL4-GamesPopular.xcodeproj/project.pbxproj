@@ -20,6 +20,8 @@
 		042E13F9283C76C700EAA199 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13F8283C76C700EAA199 /* Header.swift */; };
 		042E13FE283CB7EE00EAA199 /* SystemThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13FD283CB7EE00EAA199 /* SystemThemeManager.swift */; };
 		042E1400283CF7D700EAA199 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E13FF283CF7D700EAA199 /* Theme.swift */; };
+		043CD3AD284398F300378F7B /* isFavourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CD3AC284398F200378F7B /* isFavourite.swift */; };
+		0451EB12283E851D00C59AE3 /* RowGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451EB11283E851D00C59AE3 /* RowGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		042E13F8283C76C700EAA199 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		042E13FD283CB7EE00EAA199 /* SystemThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemThemeManager.swift; sourceTree = "<group>"; };
 		042E13FF283CF7D700EAA199 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		043CD3AC284398F200378F7B /* isFavourite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isFavourite.swift; sourceTree = "<group>"; };
+		0451EB11283E851D00C59AE3 /* RowGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 			children = (
 				042E13EA283C75AB00EAA199 /* helper.swift */,
 				042E13EC283C75CC00EAA199 /* Games.swift */,
+				043CD3AC284398F200378F7B /* isFavourite.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 				042E13F1283C761700EAA199 /* WishlistGame.swift */,
 				042E13F3283C762B00EAA199 /* ListMoreGame.swift */,
 				042E13F8283C76C700EAA199 /* Header.swift */,
+				0451EB11283E851D00C59AE3 /* RowGame.swift */,
 			);
 			path = Games;
 			sourceTree = "<group>";
@@ -199,6 +205,7 @@
 				042E13F6283C764400EAA199 /* ProfileView.swift in Sources */,
 				042E13F9283C76C700EAA199 /* Header.swift in Sources */,
 				042E13F4283C762B00EAA199 /* ListMoreGame.swift in Sources */,
+				043CD3AD284398F300378F7B /* isFavourite.swift in Sources */,
 				042E13F2283C761700EAA199 /* WishlistGame.swift in Sources */,
 				042E1400283CF7D700EAA199 /* Theme.swift in Sources */,
 				042E13EB283C75AB00EAA199 /* helper.swift in Sources */,
@@ -206,6 +213,7 @@
 				042E13F0283C75FF00EAA199 /* ListGame.swift in Sources */,
 				042E13DC283C71B600EAA199 /* AFL4_GamesPopularApp.swift in Sources */,
 				042E13FE283CB7EE00EAA199 /* SystemThemeManager.swift in Sources */,
+				0451EB12283E851D00C59AE3 /* RowGame.swift in Sources */,
 				042E13ED283C75CC00EAA199 /* Games.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

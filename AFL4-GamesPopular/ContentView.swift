@@ -16,6 +16,7 @@ struct ContentView: View {
     
     
     
+    @StateObject var favouritesState = Favourites()
     
     @AppStorage("darkModeEnabled") private var darkmodeEnabled = false
     @AppStorage("systemThemeEnabled") private var systemThemeEnabled = false
@@ -36,7 +37,7 @@ struct ContentView: View {
                 Text("Profile")
                 
             }
-        }.onAppear{
+        }.environmentObject(Favourites()).onAppear{
             SystemThemeManager.shared.handleTheme(darkMode: darkmodeEnabled, system: systemThemeEnabled)
         }
         

@@ -65,6 +65,8 @@ struct ListGame: View {
     
     private let gridmodel = [GridItem(.adaptive(minimum: 170))]
     
+    @EnvironmentObject var favourites:Favourites
+    
     @State var bottomleft:CGFloat = 0
     @State var bottomright:CGFloat = 0
     @State var selection: Int? = nil
@@ -125,9 +127,17 @@ struct ListGame: View {
                                         Text(game.title).foregroundColor(Theme.textColor)
                                             .bold()
                                         Spacer()
-                                        Button("Add to Wishlist"){
-                                            
-                                        }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                        Button(favourites.contains(game) ? "Remove from wishlist" : "Add to wishlist"){
+                                            if favourites.contains(game){
+                                                if let index = favourites.dataarray.firstIndex(of: game) {
+                                                    favourites.dataarray.remove(at: index)
+                                                }
+                                            }
+                                            else{
+                                                favourites.add(game)
+                                            }
+                                        }.buttonStyle(.borderedProminent)
+                                            .padding()
                                         Spacer()
                                         
                                     }.frame(width:180,height: 100)
@@ -177,9 +187,17 @@ struct ListGame: View {
 
                                         .bold()
                                     Spacer()
-                                    Button("Add to Wishlist"){
-                                        
-                                    }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                    Button(favourites.contains(game) ? "Remove from wishlist" : "Add to wishlist"){
+                                        if favourites.contains(game){
+                                            if let index = favourites.dataarray.firstIndex(of: game) {
+                                                favourites.dataarray.remove(at: index)
+                                            }
+                                        }
+                                        else{
+                                            favourites.add(game)
+                                        }
+                                    }.buttonStyle(.borderedProminent)
+                                        .padding()
                                     
                                 }.frame(width:180,height: 100)
                                     .background(.white)
@@ -225,9 +243,20 @@ struct ListGame: View {
 
                                             .bold()
                                         Spacer()
-                                        Button("Add to Wishlist"){
-                                            
-                                        }.background(.white).frame(height: 55).buttonStyle(.bordered)
+//                                        Button("Add to Wishlist"){
+//
+//                                        }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                        Button(favourites.contains(game) ? "Remove from wishlist" : "Add to wishlist"){
+                                            if favourites.contains(game){
+                                                if let index = favourites.dataarray.firstIndex(of: game) {
+                                                    favourites.dataarray.remove(at: index)
+                                                }
+                                            }
+                                            else{
+                                                favourites.add(game)
+                                            }
+                                        }.buttonStyle(.borderedProminent)
+                                            .padding()
                                         
                                     }.frame(width:180,height: 100)
                                         .background(.white)
@@ -279,9 +308,17 @@ struct ListGame: View {
 
                                             .bold()
                                         Spacer()
-                                        Button("Add to Wishlist"){
-                                            
-                                        }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                        Button(favourites.contains(game) ? "Remove from wishlist" : "Add to wishlist"){
+                                            if favourites.contains(game){
+                                                if let index = favourites.dataarray.firstIndex(of: game) {
+                                                    favourites.dataarray.remove(at: index)
+                                                }
+                                            }
+                                            else{
+                                                favourites.add(game)
+                                            }
+                                        }.buttonStyle(.borderedProminent)
+                                            .padding()
                                         
                                     }.frame(width:180,height: 100)
                                         .background(.white)
@@ -329,9 +366,17 @@ struct ListGame: View {
 
                                         .bold()
                                     Spacer()
-                                    Button("Add to Wishlist"){
-                                        
-                                    }.background(.white).frame(height: 55).buttonStyle(.bordered)
+                                    Button(favourites.contains(game) ? "Remove from wishlist" : "Add to wishlist"){
+                                        if favourites.contains(game){
+                                            if let index = favourites.dataarray.firstIndex(of: game) {
+                                                favourites.dataarray.remove(at: index)
+                                            }
+                                        }
+                                        else{
+                                            favourites.add(game)
+                                        }
+                                    }.buttonStyle(.borderedProminent)
+                                        .padding()
                                     
                                 }.frame(width:180,height: 100)
                                     .background(.white)
@@ -379,7 +424,7 @@ struct ListGame: View {
 
 struct ListGame_Previews: PreviewProvider {
     static var previews: some View {
-        ListGame()
+        ListGame().environmentObject(Favourites())
     }
 }
 }

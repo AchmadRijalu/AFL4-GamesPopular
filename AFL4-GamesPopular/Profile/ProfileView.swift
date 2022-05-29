@@ -21,7 +21,7 @@ struct ProfileView: View {
         VStack(alignment: .leading){
             Text("Settings").font(.largeTitle).bold()
                 .padding(.bottom , 40)
-            VStack(){
+            VStack{
                 VStack(alignment: .leading){
                     Text("Appearance").foregroundColor(.blue)
                     HStack{
