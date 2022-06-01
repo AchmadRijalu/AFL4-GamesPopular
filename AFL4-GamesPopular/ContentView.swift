@@ -24,7 +24,7 @@ struct ContentView: View {
         TabView{
             ListGame().tabItem{
                 Image(systemName: "house")
-                Text("Home")
+                Text("Menu")
             }
             
             WishlistGame().tabItem{
@@ -33,8 +33,8 @@ struct ContentView: View {
             }
             
             ProfileView(darkModeEnabled: $darkmodeEnabled, systemThemeEnabled: $systemThemeEnabled).tabItem{
-                Image(systemName: "person")
-                Text("Profile")
+                Image(systemName: "gear")
+                Text("System")
                 
             }
         }.environmentObject(Favourites()).onAppear{

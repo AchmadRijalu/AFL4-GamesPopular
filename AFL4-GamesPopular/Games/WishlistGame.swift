@@ -20,8 +20,9 @@ struct URLImage2:View{
                 .layoutPriority(1)
         }
         else{
-            Image(systemName: "video").resizable().frame(width: 130, height: 70).aspectRatio(contentMode: .fit)
-                .background(.gray).onAppear{
+            Image(systemName: "video").resizable().aspectRatio(contentMode: .fit)
+                .layoutPriority(1).background(.gray)
+                .onAppear{
                     fetchdata()
                 }
         }
@@ -45,6 +46,7 @@ struct WishlistGame: View {
     
     var body: some View {
         VStack(alignment: .leading){
+            
             
             NavigationView{
                 List{
@@ -80,6 +82,7 @@ struct WishlistGame: View {
                         
                     }
                 }.navigationTitle("Wishlist")
+                Divider()
         }
     }
 }

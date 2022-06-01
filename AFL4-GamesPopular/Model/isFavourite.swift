@@ -11,14 +11,30 @@ import Foundation
 @MainActor class Favourites:ObservableObject{
 //    @Published var manygame:Set<String>
     
-    @Published var dataarray:[Game]
+    @Published var dataarray:[Game]{
+        didSet{
+            save()
+        }
+    }
     
-    private let savekey = "favourites"
-    
+    let savekey:String = "favourites"
     
     init(){
         dataarray = []
+        getItems()
     }
+    
+    
+    func getItems() {
+        guard
+            let data = UserDefaults.standard.data(forKey: savekey),
+              let saveItems = try? JSONDecoder().decode([Game].self, from: data)
+        else{ return }
+        
+        self.dataarray = saveItems
+              
+    }
+    
     
     func contains(_ game:Game)-> Bool{
         dataarray.contains(game)
@@ -28,7 +44,7 @@ import Foundation
         objectWillChange.send()
 
         dataarray.append(game)
-        save()
+//        save()
     }
     
     
@@ -40,7 +56,10 @@ import Foundation
 //    }
     
     func save(){
-        
+    
+        if let encodedData = try? JSONEncoder().encode(dataarray){
+            UserDefaults.standard.set(encodedData, forKey: savekey)
+        }
     }
 
 }

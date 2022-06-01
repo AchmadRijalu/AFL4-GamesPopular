@@ -64,7 +64,7 @@ struct ListMoreGame: View {
 //            Text("Game List").font(.largeTitle).bold().padding(5)
 //            Spacer()
 //        }
-        ScrollView {
+        
             VStack{
                 ScrollView{
                     if gindex == 1{
@@ -297,7 +297,7 @@ struct ListMoreGame: View {
                 }.padding(5)
             }.navigationBarTitle("Game List")
             
-        }
+        
     }
     
     //SEARCH TEXT VARIABLE

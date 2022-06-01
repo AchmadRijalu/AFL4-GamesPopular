@@ -16,11 +16,11 @@ struct URLImage:View{
     @State var data:Data?
     var body: some View{
         if let data = data, let uiimage = UIImage(data: data){
-            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 180, height: 130)
+            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 170, height: 90)
                 .background(.white)
         }
         else{
-            Image(systemName: "video").resizable().frame(width: 130, height: 70).aspectRatio(contentMode: .fit)
+            Image(systemName: "video").resizable().frame(width: 170, height: 90).aspectRatio(contentMode: .fit)
                 .background(.gray).onAppear{
                     fetchdata()
                 }
@@ -42,11 +42,7 @@ struct URLImage:View{
 struct ListGame: View {
     
     @StateObject var settings = GameIndex()
-    var steam:Int = 1
-    var gamersgate:Int = 2
-    var epicgame:Int = 3
-    var origin:Int = 4
-    var gameplanet:Int = 5
+
     
     
     
@@ -90,6 +86,7 @@ struct ListGame: View {
 //                //Hide Component
 //            }
             
+            Divider()
             Spacer()
             NavigationView{
             
