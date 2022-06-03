@@ -47,43 +47,49 @@ struct WishlistGame: View {
     var body: some View {
         VStack(alignment: .leading){
             
+            if favourites.dataarray.isEmpty{
+                Text("Your Wishlist is empty.").bold()
+
+            }
             
-            NavigationView{
-                List{
-                    ForEach(favourites.dataarray, id: \.self){
-                        game in
-                        HStack{
-                            VStack{
-                            HStack{
-                                VStack{
+            else{
+                NavigationView{
+                    List{
+                            ForEach(favourites.dataarray, id: \.self){
+                                game in
+                                HStack{
+                                    VStack{
+                                    HStack{
+                                        VStack{
+                                            
+                                                URLImage2(urlstring: game.thumb)
+                                        }.background(.white).frame(width: 100)
+                                        Text(game.title).bold()
+                                        Spacer()
+                                        VStack{
+                                            Button(favourites.contains(game) ? "Remove" : "Add to wishlist"){
+                                                if favourites.contains(game){
+                                                    if let index = favourites.dataarray.firstIndex(of: game) {
+                                                        favourites.dataarray.remove(at: index)
+                                                    }
+                                                }
+                                                else{
+                                                    favourites.add(game)
+                                                }
+                                            }.tint(.red)
+                                                .controlSize(.regular)
+                                                .buttonStyle(.borderedProminent)
+                                        }
+                                    }
                                     
-                                        URLImage2(urlstring: game.thumb)
-                                }.background(.white).frame(width: 100)
-                                Text(game.title).bold()
-                                Spacer()
-                                VStack{
-                                    Button(favourites.contains(game) ? "Remove" : "Add to wishlist"){
-                                        if favourites.contains(game){
-                                            if let index = favourites.dataarray.firstIndex(of: game) {
-                                                favourites.dataarray.remove(at: index)
-                                            }
-                                        }
-                                        else{
-                                            favourites.add(game)
-                                        }
-                                    }.tint(.red)
-                                        .controlSize(.regular)
-                                        .buttonStyle(.borderedProminent)
-                                }
+                                    }
+                                }.padding(3)
+                                
                             }
-                            
-                            }
-                        }.padding(3)
-                        
-                    }
-                }.navigationTitle("Wishlist")
-                Divider()
-        }
+                        }.navigationTitle("Wishlist")
+                }
+            }
+            
     }
 }
 
@@ -92,4 +98,5 @@ struct WishlistGame_Previews: PreviewProvider {
         WishlistGame().environmentObject(Favourites())
     }
 }
+
 }

@@ -15,11 +15,11 @@ struct URLImageMore:View{
     @State var data:Data?
     var body: some View{
         if let data = data, let uiimage = UIImage(data: data){
-            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 180, height: 130)
+            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 170, height: 90)
                 .background(.white)
         }
         else{
-            Image(systemName: "video").resizable().frame(width: 130, height: 70).aspectRatio(contentMode: .fit)
+            Image(systemName: "video").resizable().frame(width: 170, height: 90).aspectRatio(contentMode: .fit)
                 .background(.gray).onAppear{
                     fetchdata()
                 }

@@ -42,10 +42,6 @@ struct URLImage:View{
 struct ListGame: View {
     
     @StateObject var settings = GameIndex()
-
-    
-    
-    
     @StateObject var viewModel = ViewModel()
     @StateObject var viewModelSteamSorted = ViewModelSteamSorted()
     @StateObject var viewModelGamersGateSorted = ViewModelGamersGateSorted()
@@ -113,12 +109,14 @@ struct ListGame: View {
                             ForEach(viewModelSteamSorted.games, id: \.self){
                                 game in
                                 VStack{
-                                    ZStack(alignment: .bottomLeading){
-                                        URLImage(urlstring: game.thumb)
-                                        Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
-                                            .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                        
-                                    }
+                                    VStack{
+                                        ZStack(alignment: .bottomLeading){
+                                            URLImage(urlstring: game.thumb)
+                                            Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
+                                                .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
+                                            
+                                        }
+                                    }.frame(height: 90)
                                     .cornerRadius(3)
                                     VStack{
                                         Text(game.title).foregroundColor(Theme.textColor)
@@ -137,12 +135,12 @@ struct ListGame: View {
                                             .padding()
                                         Spacer()
                                         
-                                    }.frame(width:180,height: 100)
+                                    }.padding(8).frame(width:190,height: 100)
                                         .background(.white)
                                     
                                 }
                                 .border(Color.gray)
-                                .cornerRadius(5)
+                                .cornerRadius(10)
                                 
                             }
                         }
@@ -173,11 +171,14 @@ struct ListGame: View {
                         ForEach(viewModelGamersGateSorted.games, id: \.self){
                             game in
                             VStack{
-                                ZStack(alignment: .bottomLeading){
-                                    URLImage(urlstring: game.thumb)
-                                    Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
-                                        .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                }
+                                VStack{
+                                    ZStack(alignment: .bottomLeading){
+                                        URLImage(urlstring: game.thumb)
+                                        Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
+                                            .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
+                                        
+                                    }
+                                }.frame(height: 90)
                                 .cornerRadius(3)
                                 VStack{
                                     Text(game.title).foregroundColor(Theme.textColor)
@@ -196,7 +197,7 @@ struct ListGame: View {
                                     }.buttonStyle(.borderedProminent)
                                         .padding()
                                     
-                                }.frame(width:180,height: 100)
+                                }.padding(8).frame(width:190,height: 100)
                                     .background(.white)
                                 
                             }
@@ -229,11 +230,14 @@ struct ListGame: View {
                             game in
                             if game.storeID == "25"{
                                 VStack{
-                                    ZStack(alignment: .bottomLeading){
-                                        URLImage(urlstring: game.thumb)
-                                        Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
-                                            .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
-                                    }
+                                    VStack{
+                                        ZStack(alignment: .bottomLeading){
+                                            URLImage(urlstring: game.thumb)
+                                            Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
+                                                .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
+                                            
+                                        }
+                                    }.frame(height: 90)
                                     .cornerRadius(3)
                                     VStack{
                                         Text(game.title).foregroundColor(Theme.textColor)
@@ -255,7 +259,7 @@ struct ListGame: View {
                                         }.buttonStyle(.borderedProminent)
                                             .padding()
                                         
-                                    }.frame(width:180,height: 100)
+                                    }.padding(8).frame(width:190,height: 100)
                                         .background(.white)
                                     
                                 }
@@ -292,14 +296,16 @@ struct ListGame: View {
                     LazyVGrid(columns: gridmodel,spacing: 10){
                         ForEach(viewModelOriginSorted.games, id: \.self){
                             game in
-                            
+                            VStack{
                                 VStack{
                                     ZStack(alignment: .bottomLeading){
                                         URLImage(urlstring: game.thumb)
                                         Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
                                             .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
+                                        
                                     }
-                                    .cornerRadius(3)
+                                }.frame(height: 90)
+                                .cornerRadius(3)
                                     VStack{
                                         Text(game.title).foregroundColor(Theme.textColor)
 
@@ -317,7 +323,7 @@ struct ListGame: View {
                                         }.buttonStyle(.borderedProminent)
                                             .padding()
                                         
-                                    }.frame(width:180,height: 100)
+                                    }.padding(8).frame(width:190,height: 100)
                                         .background(.white)
                                     
                                 }
@@ -352,10 +358,13 @@ struct ListGame: View {
                         game in
                         if game.storeID == "27"{
                             VStack{
-                                ZStack(alignment: .bottomLeading){
-                                    URLImage(urlstring: game.thumb)
-                                    Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
-                                        .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
+                                VStack{
+                                    ZStack(alignment: .bottomLeading){
+                                        URLImage(urlstring: game.thumb)
+                                        Rectangle().fill(Color.red).frame(width: 180, height: 34, alignment: .bottomLeading)
+                                            .overlay(Text((game.savings).prefix(2) + "$ OFF").foregroundColor(.white).bold())
+                                        
+                                    }
                                 }
                                 .cornerRadius(3)
                                 VStack{
@@ -375,7 +384,7 @@ struct ListGame: View {
                                     }.buttonStyle(.borderedProminent)
                                         .padding()
                                     
-                                }.frame(width:180,height: 100)
+                                }.padding(8).frame(width:190,height: 100)
                                     .background(.white)
                                 
                             }
