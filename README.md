@@ -6,7 +6,7 @@
 
 ### 📱 About Application
 Anbu's Game Discount is an application that show game list that currently discount from several store from Steam ,GamersGate, Epic Games, Origin, and GamePlanet.
-These data are a live data with catching an API from Cheapshark, with that being said,the data will always change every time depends with the store.
+These data are a live data with catching an API from Cheapshark, with that being said the data will always change every time depends with the store.
 
 ### 📹 Demonstration Video
 https://youtu.be/wG6hoL5G3dU
