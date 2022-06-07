@@ -15,7 +15,7 @@ struct URLImageMore:View{
     @State var data:Data?
     var body: some View{
         if let data = data, let uiimage = UIImage(data: data){
-            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 170, height: 90)
+            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 170, height: 90).scaledToFit()
                 .background(.white)
         }
         else{
@@ -145,7 +145,7 @@ struct ListMoreGame: View {
                                             .background(.white)
                                         
                                     }
-                                    .border(Color.gray)
+                                    .border(Color.gray).shadow(color: .gray, radius: 4, x: 4, y: 4)
                                     .cornerRadius(10)
                                 }
                                 else{
@@ -191,7 +191,7 @@ struct ListMoreGame: View {
                                             .background(.white)
                                         
                                     }
-                                    .border(Color.gray)
+                                    .border(Color.gray).shadow(color: .gray, radius: 4, x: 4, y: 4)
                                     .cornerRadius(10)
                                 }
                                 else{
@@ -236,7 +236,7 @@ struct ListMoreGame: View {
                                             .background(.white)
                                         
                                     }
-                                    .border(Color.gray)
+                                    .border(Color.gray).shadow(color: .gray, radius: 4, x: 4, y: 4)
                                     .cornerRadius(10)
                                 }
                                 else{

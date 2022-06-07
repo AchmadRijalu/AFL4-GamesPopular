@@ -16,7 +16,7 @@ struct URLImage:View{
     @State var data:Data?
     var body: some View{
         if let data = data, let uiimage = UIImage(data: data){
-            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 170, height: 90)
+            Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill).frame(width: 170, height: 90).scaledToFit()
                 .background(.white)
         }
         else{
@@ -41,7 +41,7 @@ struct URLImage:View{
 
 struct ListGame: View {
     
-    @StateObject var settings = GameIndex()
+
     @StateObject var viewModel = ViewModel()
     @StateObject var viewModelSteamSorted = ViewModelSteamSorted()
     @StateObject var viewModelGamersGateSorted = ViewModelGamersGateSorted()
@@ -52,12 +52,10 @@ struct ListGame: View {
     
     
     @State private var isShowedHeader:Int? = 0
-    
-    @ObservedObject var modelHide =  HideState()
-    
     private let gridmodel = [GridItem(.adaptive(minimum: 170))]
     
     @EnvironmentObject var favourites:Favourites
+    
     
     @State var bottomleft:CGFloat = 0
     @State var bottomright:CGFloat = 0
@@ -65,29 +63,18 @@ struct ListGame: View {
     
     var body: some View {
         VStack{
-            
-//            if modelHide.pushed == false{
-                
-                VStack(alignment:.leading){
-                    Text("👋 Anbu!")
-                        .padding(.horizontal,15)
-                    Header()
-                }
-                .transition(.move(edge: .top))
-                .animation(.easeIn(duration: 0.2))
-                
-//
-//            }
-//            else{
-//                //Hide Component
-//            }
+            VStack(alignment:.leading){
+                Text("👋 Anbu!")
+                    .padding(.horizontal,15)
+                Header()
+            }
             
             Divider()
             Spacer()
             NavigationView{
-            
-            ScrollView{
-                VStack{
+                
+                ScrollView{
+                    VStack{
                     //STEAM
                     VStack{
                         HStack{
@@ -97,10 +84,6 @@ struct ListGame: View {
                             Spacer()
                             NavigationLink(destination: ListMoreGame(gindex: 1)) {
                                 Text("More").foregroundColor(.blue)
-//                                    .onTapGesture {
-                                        //perform some tasks if needed before opening Destination view
-//                                        self.modelHide.pushed = true
-//                                    }
                             }
                             
                             
@@ -139,7 +122,7 @@ struct ListGame: View {
                                         .background(.white)
                                     
                                 }
-                                .border(Color.gray)
+                                .border(Color.gray).shadow(color: .gray, radius: 4, x: 4, y: 4)
                                 .cornerRadius(10)
                                 
                             }
@@ -160,10 +143,6 @@ struct ListGame: View {
                         Spacer()
                         NavigationLink(destination: ListMoreGame(gindex:2)) {
                             Text("More").padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)).foregroundColor(.blue)
-//                                .onTapGesture {
-                                    //perform some tasks if needed before opening Destination view
-//                                    self.modelHide.pushed = true
-//                                }
                         }
                     }.padding(.bottom, 23)
                     
@@ -201,7 +180,7 @@ struct ListGame: View {
                                     .background(.white)
                                 
                             }
-                            .border(Color.gray)
+                            .border(Color.gray).shadow(color: .gray, radius: 4, x: 4, y: 4)
                             .cornerRadius(10)
                             
                         }
@@ -263,7 +242,7 @@ struct ListGame: View {
                                         .background(.white)
                                     
                                 }
-                                .border(Color.gray)
+                                .border(Color.gray).shadow(color: .gray, radius: 4, x: 4, y: 4)
                                 .cornerRadius(10)
                             }
                             else{
@@ -327,7 +306,7 @@ struct ListGame: View {
                                         .background(.white)
                                     
                                 }
-                                .border(Color.gray)
+                                .border(Color.gray).shadow(color: .gray, radius: 4, x: 4, y: 4)
                                 .cornerRadius(10)
                             
                         }
